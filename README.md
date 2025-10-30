@@ -6,3 +6,5 @@ For example, to save all the variables in the workspace to a MAT-file named file
 >> save filename
 
 Empty the workspace using the clear command.
+
+Clear the Command Window using the clc command.
