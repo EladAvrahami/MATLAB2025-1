@@ -1,2 +1,2 @@
 # MATLAB2025-1
-Learming Matlab
+Learming Matlab - https://matlabacademy.mathworks.com/details/matlab-onramp/gettingstarted
