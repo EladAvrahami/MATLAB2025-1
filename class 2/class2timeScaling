@@ -1,0 +1,43 @@
+ %***********************************************
+% Visible Time-Scaling Demo
+Fs = 5000;                % high sampling for smooth plots
+t0 = 0:1/Fs:4;            % original time base (4 seconds)
+f0 = 1;                   % 1 Hz makes cycles easy to see
+x_orig = sin(2*pi*f0*t0);
+
+% Extreme scaling factors for clear visual difference
+a_stretch = 5;            % stretched (slower, wider)
+a_compress = 0.2;         % compressed (faster, thinner)
+
+% True time points for scaled signals: x_a(t) = x(t/a)
+t_stretch = t0 * a_stretch;       % where stretched samples lie
+x_stretch = sin(2*pi*f0*(t_stretch / a_stretch)); % equal to sin(2*pi*f0*t0)
+
+t_compress = t0 * a_compress;
+x_compress = sin(2*pi*f0*(t_compress / a_compress));
+
+% Common plotting axis (extend so stretched signal visible)
+t_common = linspace(-0.5, 6, 12000);
+
+% Interpolate each onto common axis (fill outside with 0)
+x_o = interp1(t0,        x_orig,     t_common, 'linear', 0);
+x_s = interp1(t_stretch, x_stretch,  t_common, 'linear', 0);
+x_c = interp1(t_compress,x_compress, t_common, 'linear', 0);
+
+% Vertical offsets so traces don't overlap
+off = 2.5;
+x_o_p = x_o + 0;
+x_s_p = x_s + off;
+x_c_p = x_c - off;
+
+figure('Units','normalized','Position',[0.05 0.12 0.9 0.7]);
+plot(t_common, x_o_p, 'k', 'LineWidth', 1); hold on
+plot(t_common, x_s_p, 'b', 'LineWidth', 1.2)
+plot(t_common, x_c_p, 'r', 'LineWidth', 1.2)
+xlabel('Time (s)')
+ylabel('Amplitude (offset for clarity)')
+legend('Original (a=1)','Stretched (a=5)','Compressed (a=0.2)','Location','northoutside','Orientation','horizontal')
+title('Time Scaling — Original, Much Wider, Much Thinner')
+xlim([-0.2 4.5])
+ylim([-4 5])
+grid on
