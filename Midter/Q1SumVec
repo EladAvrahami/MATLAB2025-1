@@ -1,0 +1,18 @@
+clc 
+clear all 
+
+row=1;
+col=100;
+
+v=randi([-20,20],row,col);
+
+mask=v<0;
+v(mask)=0;
+disp('******** no minos vector:********')
+v
+
+statZero=sum(v==0)/length(v)*100;
+disp(['Percentage of zeros: ', num2str(statZero), '%']);
+
+w=v(v>10);
+disp(['W is: ', num2str(w)]);
