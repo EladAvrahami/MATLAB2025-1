@@ -1,47 +1,27 @@
-%Q4
-%normalizeVector
-
 clc
-clear all 
-%% חלק א': הסקריפט (The Script)
+clear all
 
-% 1. יצירת וקטור אקראי באורך 50 (ערכים בין 0 ל-100)
-v = randi([0, 100], 1, 50);
+x = linspace(0, 4*pi, 500);
 
-% 2. שתילת ערכי NaN בצורה אקראית (כדי לבדוק שהפונקציה מסננת אותם)
-nan_indices = randperm(50, 5); % בוחר 5 מיקומים אקראיים
-v(nan_indices) = NaN;
+y1=sin(x);
+y2=exp(-0.1*x);
 
-disp('Original Vector (with NaNs):');
-disp(v);
-
-% 3. קריאה לפונקציה שלנו
-v_normalized = normalizeVector(v);
-
-disp('Normalized Vector (0 to 1):');
-disp(v_normalized);
-
-% 4. ציור התוצאה (Plot)
 figure;
-plot(v_normalized, '-o', 'LineWidth', 1.5, 'MarkerFaceColor', 'b');
-title('Normalized Vector Data');
-xlabel('Index');
-ylabel('Normalized Value (0-1)');
+
+yyaxis left;
+
+plot(x,y1,'-b','LineWidth',1.5);
+hold on;
+ylabel('Y value left');
+
+yyaxis right;
+plot(x,y2,'g');
+ylabel('title right')
+
+hold off
+
+legend('sin(x)','exp(-0.1*x)');
 grid on;
+title('Elad title');
+xlabel('X count');
 
-
-%% חלק ב': הפונקציה (The Function)
-function x_norm = normalizeVector(x)
-    % שלב 1: הסרת ערכי NaN
-    % משתמשים בלוגיקה: "תביא לי את x, במקומות שאינם NaN"
-    clean_x = x(~isnan(x));
-    
-    % שלב 2: מציאת מינימום ומקסימום של הווקטור הנקי
-    min_val = min(clean_x);
-    max_val = max(clean_x);
-    
-    % שלב 3: חישוב הנרמול לפי הנוסחה
-    % (הערך פחות המינימום) לחלק (למקסימום פחות המינימום)
-    % זה מבטיח שהתוצאה תהיה תמיד בין 0 ל-1
-    x_norm = (clean_x - min_val) / (max_val - min_val);
-end
