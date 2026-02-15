@@ -1,0 +1,23 @@
+%prime
+clc; 
+clear all;
+
+n = input('Enter a positive integer: ');
+isPrime = 1;
+
+if n < 2
+    isPrime = 0;
+else
+    for i = 2:n-1
+        if rem(n, i) == 0
+            isPrime = 0;
+            break;
+        end
+    end
+end
+
+if isPrime
+    disp([num2str(n), ' is a prime number.']);
+else
+    disp([num2str(n), ' is NOT a prime number.']);
+end
