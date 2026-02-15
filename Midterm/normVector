@@ -1,0 +1,13 @@
+%practice
+clc;
+clear all;
+
+v=randi([1,100],1,20)
+dice=randperm(20,5);
+v(dice)=NaN;
+v
+
+clearV=v(~isnan(v));
+
+disp('the new vector clean of NaN is: ')
+clearV
