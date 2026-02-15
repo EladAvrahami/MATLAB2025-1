@@ -1,0 +1,48 @@
+clc
+clear all
+close all 
+
+%Q2 *****ערכים עצמיים סכימה שורה/עמודה איפוס מתחת אלכסון ראשיודרגה 
+
+row=6;
+col=6
+A=randi([1,9],row,col)
+
+%4 ערכים עצמיים 
+max_eig=max(eig(A)) 
+disp(['Largest Eigenvalue: ', num2str(max_eig)]);
+
+%1
+%**********ניסון שלי ********
+%sumrowTotal=0;
+%for i=1:6
+%sumrowi=sum(A(i,:));
+%sumrowTotal=sumrowTotal+sumrowi;
+%end
+%disp(sumrowTotal)
+%******תשובה יותר טובה ********
+sumrows=sum(A,2)%סוכם שורות 
+sumcol=sum(A)
+disp(['sum of each row: ', num2str(sumrows')]);
+disp(['sum of each col: ', num2str(sumcol)]);
+
+
+
+
+%2
+%zeros(A(diag(A,-1)));
+B=triu(A);
+B
+%A
+
+%3 לא יודע מה זה דרגה של מטריצה 
+RankB=rank(B);
+disp(['rank ', num2str(RankB)]);
+
+
+
+
+
+
+
+ 
